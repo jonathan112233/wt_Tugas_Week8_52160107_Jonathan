@@ -1,0 +1,22 @@
+.required{
+      color:red;
+}
+
+.form-control{
+    border-color:red;
+}
+.name{
+    border-color:grey;
+}
+.note{
+    border-color:grey;
+    height: 10cm;
+}
+.color{
+    background-color: grey;
+
+}
+
+
+
+

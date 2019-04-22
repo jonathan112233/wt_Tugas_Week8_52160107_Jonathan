@@ -1,0 +1,129 @@
+<!-- <h2>Template-drive form</h2>
+<form (ngSubmit)="submit1()" #myForm="ngForm">
+  Nama:
+  <input #nama="ngModel" required type="text" name="nama" [(ngModel)]="formModel.nama"><br />
+
+  <p *ngIf="!nama.valid && nama.touched">Atribut nama harus diisi</p>
+
+  nim:
+  <input #nim="ngModel" required type="text" name="nim" [(ngModel)]="formModel.nim"><br />
+
+  <p *ngIf="!nim.valid">Atribut nim harus diisi</p>
+
+  <button type="submit" [disabled]="!myForm.valid">Submit</button>
+</form>
+
+<h2>Isian form Anda</h2>
+Nama: {{nama.value}} <br />
+nama valid: {{nama.valid}} <br />
+nama touched: {{nama.touched}} <br />
+nama pristine: {{nama.pristine}} <br />
+nama dirty: {{nama.dirty}} <br />
+
+<h3>Status form Anda</h3>
+valid: {{myForm.valid}} -->
+<div class="panel-heading" [style.backgroundColor]="categoryColor">
+<h1>STUDENT DETAILS</h1>
+<form (ngSubmit)="submit2()" [formGroup]="myReactiveForm">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Nama<span class="required">*</span></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" formControlName="nama" placeholder="Masukkan nama Anda"/>
+    </div>
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="nama.errors?.required && nama.touched">
+    Atribut nama harus diisi
+  </div>
+  <div class="alert-warning" role="alert" *ngIf="nama.errors?.minlength && nama.touched && !nama.errors?.pattern">
+    Atribut nama harus minimal 5 karakter
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="nama.errors?.maxlength && nama.touched && !nama.errors?.pattern">
+    Atribut nama harus maksimal 20 karakter
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="nama.errors?.pattern && nama.touched">
+    Nama tak valid 
+  </div>
+<div class="form-group row">
+  <label class="col-sm-2 col-form-label">Faculty<span class="required">*</span></label>
+  <div class="col-sm-10">
+    <select class="form-control" name="Faculties" (change)="onChange($event.target.value)">
+      <option disabled>Select</option>
+      <option *ngFor="let Faculties of Faculties" [value]="Faculties">{{Faculties}}</option>
+      <div class="alert alert-warning" role="alert" *ngIf="Faculties.errors?.required && Faculties.touched">
+    Atribut Faculty harus diisi
+  </div>
+    </select>
+  </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">NIM<span class="required">*</span></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" formControlName="nim" placeholder="Masukkan nim Anda" />
+    </div>
+  </div>
+  
+  <div class="alert alert-warning" role="alert" *ngIf="nim.errors?.required && nim.touched">
+    Atribut NIM harus diisi
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="!nim.errors?.maxlength && nim.touched && !nim.errors?.pattern">
+    NIM harus 8 digit
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="nim.errors?.pattern && nim.touched">
+    NIM tak valid
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Entry Date<span class="required">*</span></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" formControlName="date" placeholder="MM/DD/YYYY" />
+    </div>
+    <div class="alert alert-warning" role="alert" *ngIf="date.errors?.required && date.touched">
+    Atribut Date harus diisi
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="date.errors?.pattern && date.touched">
+    Date harus berupa MM/DD/YYYY
+  </div>
+  </div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Birth Date</label>
+    <div class="col-sm-10">
+      <input type="date" class="name form-control" formControlName="birthdate"/>
+    </div>
+    <div class="alert alert-warning" role="alert" *ngIf="birthdate.errors?.required && birthdate.touched">
+    Atribut Date harus diisi
+  </div>
+  </div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Address</label>
+    <div class="col-sm-10">
+      <input type="text" class="name form-control" formControlName="address" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Note</label>
+    <div class="col-sm-10">
+      <input type="text" class="note form-control" formControlName="note" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Phone</label>
+    <div class="col-sm-10">
+      <input type="text" class="name form-control" formControlName="phone" placeholder="+62______-____" />
+    </div>
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="phone.errors?.pattern && phone.touched">
+    Phone tak valid
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Email<span class="required">*</span></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" formControlName="email"/>
+    </div>
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="email.errors?.required && email.touched">
+    Atribut Email harus diisi
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="email.errors?.pattern && email.touched">
+    Email tak valid 
+  </div>
+
+  </form>
